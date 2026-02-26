@@ -4,25 +4,21 @@ teaching: 10
 exercises: 0
 ---
 
-:::::::::::::::::::::::::::::::::::::: questions 
-
+::: questions 
 - Is job wall-time the only way to study job performance?
 - What are commonly used metrics and perspectives on job performance?
+:::
 
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: objectives
-
+::: objectives
 After completing this episode, participants should be able to …
 
 - Create a comprehensive performance overview through dedicated tools.
 - Explain the difference between sampling and tracing.
 - Measure utilization and the impact of underlying hardware components.
+:::
 
-::::::::::::::::::::::::::::::::::::::::::::::::
 
-
-:::::::::::::::::::::::::: instructor
+::: instructor
 ## Intention: Introduce third party tools for performance reports
 
 Narrative:
@@ -39,8 +35,7 @@ What we're doing here:
 - Get a complete picture
 - Introduce additional metrics / definitions, and popular representations of data, e.g. Roofline
 - Relate to hardware on the same level of detail
-
-:::::::::::::::::::::::::::::::::::::
+:::
 
 
 Wall-time measurements with `time` do not tell us why exactly an application is slower than expected.
@@ -403,7 +398,7 @@ N/A
 :::
 
 
-::: challenge
+:::: challenge
 ## Exercise: Match application behavior to hardware
 
 Which parts of the computer hardware may become a point of contention for these application patterns:
@@ -427,7 +422,7 @@ Maybe not the best questions, also missing something for accelerators.
 6. Memory (capacity)
 7. I/O (disk)
 :::
-:::
+::::
 
 
 ## Summary
@@ -438,7 +433,7 @@ Many tools are available, but some may have to be set up by the HPC system admin
 The relationship between a job and the execution on physical hardware can become a very deep topic.
 One of these topics is the correct mapping of job processes to the requested number of CPU cores, addressed in the next episode.
 
-:::::::::::::::::::::::::::::::::::::: keypoints
+::: keypoints
 - Performance tools measure data as regular samples or by tracing every event
 - The data is either processed and visualized in a timeline or aggregated in a final profile
 - Job performance relates closely to contention points in physical hardware
@@ -446,4 +441,5 @@ One of these topics is the correct mapping of job processes to the requested num
   - Memory utilization (capacity, bandwidth, latency)
   - Disk I/O
   - Network I/O
-::::::::::::::::::::::::::::::::::::::::::::::::
+
+:::
