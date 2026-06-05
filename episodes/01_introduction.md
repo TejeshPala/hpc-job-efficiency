@@ -307,7 +307,13 @@ done
 echo Sum=$sum
 ```
 
-Copy this into a file called `sum.bash` and make it executable:
+Copy this into a file called `sum.bash`, or download it directly:
+
+```bash
+curl -L -o sum.bash https://raw.githubusercontent.com/carpentries-incubator/hpc-job-efficiency/main/learners/data/sum.bash
+```
+
+Then make it executable:
 
 ```bash
 chmod u+x sum.bash
@@ -400,7 +406,11 @@ start=$(date +%s.%N) && ./sum.bash && end=$(date +%s.%N) && echo "$end - $start"
 ```
 
 Another option is to place the timestamp measurements directly inside the `sum.bash`
-script:
+script, or download it directly:
+
+```bash
+curl -L -o sum_with_date.bash https://raw.githubusercontent.com/carpentries-incubator/hpc-job-efficiency/main/learners/data/sum_with_date.bash
+```
 
 ```bash
 #!/usr/bin/env bash
@@ -417,7 +427,7 @@ done
 
 end=$(date +%s.%N) # store end timestamp
 
-echo Sum=$sum runtime=$(echo "$end - $start" | bc -l)
+echo Sum=$sum runtime=$(echo "$end - $start" | bc -l)s
 ```
 
 ::::
