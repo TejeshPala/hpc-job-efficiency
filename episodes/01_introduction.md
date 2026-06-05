@@ -99,7 +99,7 @@ sleep 2
 
 This command pauses execution for a specified duration, here 2 seconds,
 before continuing with the next command.
-You can verify the nap duration using a stopwatch, here provided by the `time` command:
+You can verify the "sleep" duration using a stopwatch, here provided by the `time` command:
 
 ```bash
 time sleep 2
@@ -446,7 +446,7 @@ In this approach, which we will call the *one-liner*, the loop, arithmetic, and
 accumulation are executed inside a single `bc` process. This avoids the repeated process
 creation and communication overhead present in the original implementation.
 
-This simple example illustrates a common performance-engineering principle in HPC:
+This example illustrates a common performance-engineering principle in HPC:
 substantial speedups can often be achieved by replacing inefficient implementations with
 numerically optimized software libraries or by reducing runtime-management overhead.
 
