@@ -170,6 +170,23 @@ On HPC systems, different login shells or environment configurations may produce
 different `time` output formats. This can become important when runtime information is
 parsed automatically in benchmarking or profiling workflows.
 
+### Benchmarking and profiling
+
+Runtime measurements are often collected automatically during performance studies.
+
+- **Benchmarking** measures how application performance changes under different execution
+conditions, such as varying the number of CPU cores, nodes, threads, problem sizes, or
+hardware configurations.
+- **Profiling** collects detailed information about how a program uses computational
+resources during execution. This may include where execution time is spent, memory usage,
+communication overhead, I/O activity, or other performance-related metrics.
+
+Because such workflows often process timing data automatically, differences in the
+output format produced by `time` may require special handling.
+
+Benchmarking and profiling are commonly used to identify performance bottlenecks and
+evaluate optimization strategies for HPC applications.
+
 It is also worth noting that shell keyword documentation is invoked via `help <KEYWORD>`,
 for example `help time`, while most executables have manual pages, e.g., `man time`.
 Finally, you can prefix the command with a backslash to force Bash to invoke the external
