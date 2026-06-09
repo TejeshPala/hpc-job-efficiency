@@ -104,7 +104,7 @@ sleep 2
 
 This command pauses execution for a specified duration, here 2 seconds,
 before continuing with the next command.
-You can verify the "sleep" duration using a stopwatch, here provided by the `time` command:
+You can verify the pause duration using a stopwatch, here provided by the `time` command:
 
 ```bash
 time sleep 2
@@ -122,7 +122,7 @@ The `time` command is often one of the first performance-analysis tools introduc
 in HPC.
 This command provides a breakdown of elapsed wall-clock time and CPU execution time
 consumed by your program.
-The standard output of `time` reports three fields, *real*, *user* and *sys*:
+The `time` command reports three timing measurements: *real*, *user*, and *sys*.
 
 +------+-------------------------------------------------------------------------------+
 | Time | Meaning                                                                       |
@@ -312,6 +312,16 @@ echo "$end - $start" | bc -l
 
 ## Part 1: An inefficient job example
 
+::: instructor
+
+Ask learners to run the script with `time` and estimate what it might be doing
+before revealing the source code of `sum.bash`.
+
+Guide learners toward identifying where time is spent:
+the mathematical calculations themselves or the repeated creation of external processes.
+
+::::::::::::::
+
 After warming up with some basic timing methods, let's analyze the efficiency of
 a small script that performs a slightly more demanding workload than the `sleep`
 command. Have a look at the following short Bash script.
@@ -352,15 +362,6 @@ For example, $e^{2 \cdot \ln(3)} = 3^2$, where $\ln$ denotes the natural logarit
 The second statement inside the loop (`sum=...`) accumulates the computed values
 $i^2$ into the variable `sum`, so the final `echo` statement prints the total sum
 $\sum_{i=1}^{1000}i^2$.
-
-::: instructor
-
-Ask learners to run the script with `time` and estimate what it might be doing
-before revealing the source code of `sum.bash`.
-
-Address the learners gradually regarding the inefficiencies caused.
-
-::::::::::::::
 
 ::::::::::::: challenge
 
