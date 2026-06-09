@@ -159,13 +159,13 @@ $ /usr/bin/time sleep 2
 # Compare the output to the Bash built-in:
 $ time sleep 2
 
-real    0m2,003s
-user    0m0,001s
-sys     0m0,003s
+real    0m2.003s
+user    0m0.001s
+sys     0m0.003s
 
 # Yet another example output of `time` in zsh, an alternative shell implementation to Bash
 $ time sleep 2
-sleep 2  0,00s user 0,00s system 0% cpu 2,003 total
+sleep 2  0.00s user 0.00s system 0% cpu 2.003 total
 ```
 
 Notice the different output formatting.
