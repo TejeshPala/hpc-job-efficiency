@@ -1,24 +1,24 @@
 ---
 title: "Introduction"
-teaching: 10
-exercises: 0
+teaching: 60
+exercises: 60
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
 - What exactly is job efficiency in the computing world?
 - Why would I care about job efficiency and what are potential pitfalls?
-- How can I start measuring how my program performs?
+- How can I begin measuring the runtime performance of my programs?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-After completing this episode, participants should be able to …
+After completing this episode, participants should be able to:
 
-- Use timing commands provided by `time`and`date`.
-- Understand the benefits of efficient jobs in terms of runtime and numerical accuracy.
-- Have developed some awareness about the overall high energy consumption of HPC.
+- Use `time` and `date` to measure program runtime.
+- Identify how implementation choices affect runtime, resource usage, and numerical results.
+- Explain how inefficient jobs affect resource consumption and energy usage.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -50,12 +50,16 @@ What we're doing here:
 :::::::::::::::::::::::::::::::::::::
 
 ::: instructor
-# TODO: Possible to highlight individual benefits of efficient jobs more?
 
-Maybe good to also address perspective of "why should I care".
-You get more out of your fair share.
-Shorter iteration times => more/better insight
-...
+Ask learners: "Why should you care about efficiency?"
+
+After the answers, address the learners with efficient jobs, they can attain/achieve:
+- shorter turnaround time
+- lower resource consumption
+- lower allocation usage
+- more scientific iterations
+- lower energy consumption
+
 ::::::::::::::
 
 <!---the ratio of the useful work performed by a machine or in a process to the total energy expended or heat taken in
@@ -74,8 +78,9 @@ as CPU cores, memory, GPUs, storage systems, and interconnect bandwidth, while
 also minimizing runtime and energy consumption. Or, phrased more bluntly, we
 want to avoid running large HPC systems for *nothing but hot air*.
 
-One may argue that a single inefficient job hardly affects the overall power
-consumption of an HPC system, since such systems operate continuously anyway.
+At first glance, a single inefficient job may seem to have little impact
+on overall power consumption of an HPC system, since such systems operate
+continuously anyway.
 A similar argument could be made about air travel: the airplane will take off
 regardless of whether one additional passenger boards the flight.
 However, individual behavior still contributes to overall efficiency.
@@ -107,14 +112,14 @@ time sleep 2
 
 which will produce output similar to
 
-```
+```output
 real    0m2.002s
 user    0m0.001s
 sys     0m0.000s
 ```
 
-The `time` command will serve as our first performance-measuring tool. `time` has
-become a bit of a *hello-world* equivalent in HPC contexts.
+The `time` command is often one of the first performance-analysis tools introduced
+in HPC.
 This command provides a breakdown of elapsed wall-clock time and CPU execution time
 consumed by your program.
 The standard output of `time` reports three fields, *real*, *user* and *sys*:
@@ -162,6 +167,7 @@ sys     0m0,003s
 $ time sleep 2
 sleep 2  0,00s user 0,00s system 0% cpu 2,003 total
 ```
+
 Notice the different output formatting.
 All tools provide similar insight, but the formatting and exact information may differ.
 So, if you saw something that looks different from the Bash built-in command, this may be why!
@@ -349,9 +355,11 @@ $\sum_{i=1}^{1000}i^2$.
 
 ::: instructor
 
-#TODO: Can we use `time` and `date` to find the issue with the subshells?
+Ask learners to execute and interpret what `sum.bash` script is doing with `time`
+instead of looking at the code.
 
-Better to teach a way to find the issue, than staring at the script and thinking about it
+Address the learners gradually regarding the inefficiencies caused.
+
 ::::::::::::::
 
 ::::::::::::: challenge
@@ -536,19 +544,22 @@ bottlenecks.
 ### To be precise: Numerical efficiency
 ::: instructor
 
-# TODO: Maybe move discussion eleswere?
+Ask learners:
+- Can a calculation be fast but scientifically useless?
+- Can a calculation be extremely accurate but unnecessarily expensive?
 
-Quality and necessity of calculations are important factors in efficiency. Redundant
-calculations are inefficient, for example.
-This section may be still too much of a detour from the introduction, at least in
-its current form.
-May be a chance to shorten the episode as well
+Guide the discussion toward the trade-off between numerical accuracy and computational
+cost.
+
+Different scientific applications require different levels of numerical precision.
+Choosing more precision than necessary may increase runtime, memory usage, and
+energy consumption without improving scientific results.
 
 ::::::::::::::
 
 Computational inefficiency is not limited to unnecessarily slow implementations.
-It can also arise when calculations are performed with unnecessarily high numerical
-precision.
+It can also arise when calculations are performed with a higher numerical precision
+than required for the scientific objective.
 
 In scientific computing, numerical precision determines how accurately numbers are
 represented and processed by the CPU, for example through single-precision or
@@ -590,7 +601,7 @@ Which scenario is more prone to small losses accumulating over time?
 The external loop implementation `sum.bash` and the internal `bc` one-liner may produce
 results similar to
 
-```text
+```output
 333833499.99999999999667056674 # bc, external loop (sum.bash)
 333833500                      # bc, internal loop (one-liner)
 ```
@@ -613,18 +624,25 @@ As a result, the value produced by `sum.bash` is typically slightly smaller than
 mathematically expected result due to accumulated truncation and rounding effects.
 Although `bc` supports arbitrary precision arithmetic, the effective numerical precision
 still depends on how calculations are performed and how intermediate results are represented.
+
 ::::
+
 :::::::::::::
+
+So far we have focused on efficiency from the perspective of runtime and
+numerical accuracy. In HPC environments, however, efficiency also affects
+resource consumption and energy usage. We now broaden the discussion from
+individual programs to the computing systems that execute them.
 
 ## Part 2: About HPC power consumption
 
-The *HP* (*high-performance*) in HPC refers to computer systems designed to perform
-large amounts of computation efficiently through parallelism.
+Modern HPC systems are designed to perform large amounts of computation efficiently
+through parallelism.
 
-Modern HPC systems achieve high performance by combining many processing elements,
-such as CPU cores, GPUs, and compute nodes, that operate simultaneously on different
-parts of a computational problem. Parallel programming therefore focuses on dividing
-workloads into smaller tasks that can execute concurrently.
+They achieve this by combining many processing elements, such as CPU cores, GPUs,
+and compute nodes, that operate simultaneously on different parts of a computational
+problem. Parallel programming therefore focuses on dividing workloads into smaller
+tasks that can execute concurrently.
 
 As a result, many HPC efficiency considerations revolve around keeping computational
 resources utilized effectively while minimizing idle time, synchronization overhead,
@@ -633,12 +651,17 @@ and unnecessary communication.
 We will revisit several of these performance and efficiency aspects in later episodes.
 
 ::: instructor
-# TODO: Add actions / live-coding to sections below?
 
-Maybe too much info vs. too little activity, currently?
+Ask learners:
+- How do HPC centers measure resource usage?
+- How do users know how much of their allocation they have consumed?
+
+Use the upcoming challenge to introduce common HPC accounting concepts such as
+core-hours, allocations, queues, and resource limits.
+
 ::::::::::::::
 
-### The more the merrier: CPU/GPU cores
+### The more the merrier: Parallel resources
 
 Many parallel computing applications use multiple CPU cores, or even multiple CPUs,
 simultaneously.
@@ -727,9 +750,9 @@ The additional energy consumption caused by the workload is therefore approximat
 
 HPC centers often provide different job *queues* for different classes of workloads.
 For example, a queue named *big-jobs* may be reserved for jobs exceeding a certain
-number of parallel processes or *tasks* (e.g., 1024). Another queue, such as *big-mem*,
-may provide access to nodes with very large memory capacities (e.g., 512 GB, 1 TB,
-or more RAM per compute node).
+number of *parallel tasks* (often implemented as *processes*) (e.g., 1024).
+Another queue, such as *big-mem*, may provide access to nodes with very large
+memory capacities (e.g., 512 GB, 1 TB, or more RAM per compute node).
 
 Assume the following queues are available, all with identical memory configurations:
 
@@ -743,7 +766,8 @@ When submitting the example HPC workload from the previous section:
    (€1 = 100 cents)?
 
 :::: hint
-The total number of tasks is approximately:
+For this example, assume one task is assigned to each CPU core.
+The total number of tasks is therefore approximately:
 \[
 \text{cores per node}  \times \text{number of nodes}
 \]
@@ -752,6 +776,7 @@ Total core hours are then computed as:
 \[
 \text{task count} \times \text{runtime in hours}
 \]
+
 ::::
 
 :::: solution
@@ -770,7 +795,9 @@ At a billing rate of 1 cent per core-h, the total cost becomes
 \[
 9216 \times 0.01\,€ = 92.16\,€
 \]
+
 ::::
+
 :::::::::::::
 
 ### What are watt-hours?
@@ -876,11 +903,15 @@ more efficiently.
 - Understand the benefits of efficient jobs in terms of runtime and numerical accuracy.
 - Have developed some awareness about the overall high energy consumption of HPC.
 --->
+
 :::::::::::::::::::::::::::::::::::::: keypoints
-- Using a *stopwatch* like`time`gives you a first tool to log actual versus expected runtimes; it is also useful for carrying out runtime comparisons.
-- Which hardware piece (CPU, memory/RAM, disk, network, etc.) poses a limiting factor, depends on the nature of a particular application.
-- Large-scale computing is power hungry, so we want to use the energy wisely. As shown in the next episodes, you have more *power* than it may be expected over controlling job efficiency and thus overall energy footprint.
-- Computing job efficiency goes beyond individual gain in runtime as shared resources are used more effectively, that is, the ratio $\frac{useful\;work}{total\;energy\;expended}\sim\frac{number\;of\;users}{total\;energy\;expended}$ improves.
+- Runtime can be measured using tools such as `time` and `date`.
+- Repeated process creation can dominate runtime.
+- HPC resource usage is commonly measured in core-hours.
+- Computational workloads may be compute-bound, memory-bound, or I/O bound.
+- Efficient jobs reduce both resource consumption and energy use.
+- Implementation choices can affect both runtime and numerical accuracy.
+
 ::::::::::::::::::::::::::::::::::::::
 
 ## So what's next?
@@ -895,11 +926,12 @@ Ray tracing is a technique that simulates how light travels in a 3D scene to cre
 realistic images. It simulates the behaviour of light in terms of optical effects like
 reflection, refraction, shadows, absorption, etc. 
 The underlying calculations involve real-world physics, 
-which makes them computationally expensive - a perfect HPC case.
+which makes them computationally expensive - an ideal HPC use case.
 
 Here is a basic run script:
-```
-#!/usr/bin/bash
+
+```bash
+#!/usr/bin/env bash
 #SBATCH --time=01:00:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=4
@@ -916,5 +948,6 @@ larger than *real* time.
 ::: discussion
 Why is the `user` timer larger than the `real` time, and what does it mean?
 
-Any guess which number in the `mpirun`line corresponds roughly to that factor?
+Any guess which number in the `mpirun` line corresponds roughly to that factor?
+
 ::::::::::::::
