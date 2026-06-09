@@ -355,8 +355,8 @@ $\sum_{i=1}^{1000}i^2$.
 
 ::: instructor
 
-Ask learners to execute and interpret what `sum.bash` script is doing with `time`
-instead of looking at the code.
+Ask learners to run the script with `time` and estimate what it might be doing
+before revealing the source code of `sum.bash`.
 
 Address the learners gradually regarding the inefficiencies caused.
 
@@ -636,7 +636,7 @@ individual programs to the computing systems that execute them.
 
 ## Part 2: About HPC power consumption
 
-Modern HPC systems are designed to perform large amounts of computation efficiently
+Modern HPC systems achieve high performance by executing many computations concurrently
 through parallelism.
 
 They achieve this by combining many processing elements, such as CPU cores, GPUs,
