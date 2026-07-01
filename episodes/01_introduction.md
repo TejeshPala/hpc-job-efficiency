@@ -941,10 +941,23 @@ reflection, refraction, shadows, absorption, etc.
 The underlying calculations involve real-world physics, 
 which makes them computationally expensive - an ideal HPC use case.
 
-Here is a basic run script:
+::: instructor
+
+Encourage learners to estimate the ratio between `user` and `real` before discussing
+the meaning of the `-np 4` option. Do not explain the result immediately.
+
+The explanation of accumulated CPU time across multiple MPI processes will be
+introduced in the following episodes.
+
+:::
+
+::::::: challenge
+
+### Submit your first raytracer job with Slurm
 
 ```bash
 #!/usr/bin/env bash
+#SBATCH --job-name=first-script-Snowman
 #SBATCH --time=01:00:00
 #SBATCH --nodes=1
 #SBATCH --tasks-per-node=4
@@ -954,13 +967,49 @@ Here is a basic run script:
 time mpirun -np 4 raytracer -width=800 -height=800 -spp=128
 ```
 
-Check the `time` output at the end of the job's output file (named something like
-`slurm-<NUMBER>.out`). You will notice that *user* time is by a certain factor
-larger than *real* time. 
+::: hint
+Compare the `real` and `user` times reported at the end of the job's output file
+(named something like `slurm-<NUMBER>.out`).
+
+How do they differ?
+
+:::
+
+::: solution
+
+Notice that the reported *user* time is substantially larger than the elapsed
+*real* time.
+
+```output
+Image rendered in CPU
+
+==============================================
+     Computational Performance Metrics
+==============================================
+Image Size:                 800 x 800
+Number of Snowmen:          3
+MPI Processes:              4
+Threads per Process:        1
+----------------------------------------------
+Performance (rays/sec):     2.699e+06
+----------------------------------------------
+Max Local Computation Time (s):              30.357
+Min Local Computation Time (s):              30.106
+Avg Local Computation Time (s):              30.172
+==============================================
+
+real    0m38.484s
+user    2m1.221s
+sys     0m3.969s
+```
+
+:::
+
+:::::::
 
 ::: discussion
-Why is the `user` timer larger than the `real` time, and what does it mean?
+What is the ratio between the reported `user` and `real` times?
 
-Any guess which number in the `mpirun` line corresponds roughly to that factor?
+Which command-line argument in `mpirun -np 4` might explain this ratio?
 
 ::::::::::::::
