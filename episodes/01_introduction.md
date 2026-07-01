@@ -709,6 +709,18 @@ allocations. However, HPC workloads also depend heavily on other hardware resour
 - **Storage:** Other applications process massive amounts of data. Fields such as
   genomics, climate modeling, and large-scale simulations may involve terabytes or even
   petabytes of data that must be stored, transferred, and analyzed efficiently.
+- **GPU-hours:** Some HPC centers account for GPU usage separately using
+  **GPU-hours** (**GPU-h**). A GPU-hour represents the use of one GPU for one hour,
+  analogous to a CPU core-hour. For example, running a job for one hour on a node
+  with four allocated GPUs consumes **4 GPU-h**. GPU-hours are typically
+  accounted for independently of CPU core-hours, although individual HPC centers
+  may combine both resources in their allocation or billing policies.
+
+For example, a job allocated one compute node with 48 CPU cores and 4 allocated GPUs
+for one hour consumes:
+- 1 node-hour,
+- 48 core-hours, and
+- 4 GPU-hours.
 
 ::::::::::::::::::::::::::
 
