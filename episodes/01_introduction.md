@@ -67,12 +67,12 @@ After the answers, address the learners with efficient jobs, they can attain/ach
 
 ## Background
 
-Job efficiency, as defined by Oxford’s English Dictionaries, is *the ratio of
+According to Oxford’s English Dictionaries, *efficiency* is "*the ratio of
 the useful work performed by a machine [...] to the total energy expended or
-heat taken in*.
+heat taken in*".
 
-In a *High-Performance Computing* (*HPC*) context, the useful work corresponds
-to the scientific computations performed by the system. Efficient execution
+In a *High-Performance Computing* (*HPC*) context, **the useful work** corresponds
+to the scientific computations performed by an application. Efficient execution
 therefore means making effective use of allocated computational resources such
 as CPU cores, memory, GPUs, storage systems, and interconnect bandwidth, while
 also minimizing runtime and energy consumption. Or, phrased more bluntly, we
@@ -552,10 +552,8 @@ individual programs to the computing systems that execute them.
 Modern HPC systems achieve high performance by distributing computations across many
 CPU cores, GPUs, and compute nodes that operate in parallel.
 
-They achieve this by combining many processing elements, such as CPU cores, GPUs,
-and compute nodes, that operate simultaneously on different parts of a computational
-problem. Parallel programming therefore focuses on dividing workloads into smaller
-tasks that can execute concurrently.
+To make effective use of these resources, parallel programs divide a workload into
+smaller tasks that can execute concurrently.
 
 As a result, many HPC efficiency considerations revolve around keeping computational
 resources utilized effectively while minimizing idle time, synchronization overhead,
