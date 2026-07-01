@@ -843,7 +843,7 @@ more efficiently.
 
 The following episodes will put a number of these introductory thoughts 
 into concrete action by looking at efficiency aspects around 
-a compute-intense graphical program.
+a computationally demanding graphical program.
 While it is not directly an action-loaded video game, it does contain essential
 pieces thereof, because it uses the technique of ray tracing.
 
