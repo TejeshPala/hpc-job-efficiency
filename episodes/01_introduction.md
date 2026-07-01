@@ -637,8 +637,8 @@ individual programs to the computing systems that execute them.
 
 ## Part 2: About HPC power consumption
 
-Modern HPC systems achieve high performance by executing many computations concurrently
-through parallelism.
+Modern HPC systems achieve high performance by distributing computations across many
+CPU cores, GPUs, and compute nodes that operate in parallel.
 
 They achieve this by combining many processing elements, such as CPU cores, GPUs,
 and compute nodes, that operate simultaneously on different parts of a computational
